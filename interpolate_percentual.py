@@ -32,8 +32,14 @@ def interpolate(args, generator, l1, l2, n1, n2):
         # interp_vals = np.linspace(1./args.n_frames, 1, num=args.n_frames)
         latent_interp = slerp(percent, slice_l1.cpu().numpy(), slice_l2.cpu().numpy())
 
-        input = torch.tensor(latent_interp)
-        input = input.view(1, 512)
+        interpolated = torch.tensor(latent_interp)
+        torch.save({
+            "latent": interpolated,
+            "noise": n1,
+            "noises": [n1,n2],
+        }, "interpolation_percentual/result.pt")
+
+        input = interpolated.view(1, 512)
         input = input.to("cuda")
         image, _ = generator([input], input_is_latent=True, noise=n1)
 
@@ -48,11 +54,6 @@ def interpolate(args, generator, l1, l2, n1, n2):
             normalize=True,
             range=(-1, 1),
         )
-        torch.save({
-            "latent": input,
-            "noise": n1,
-            "noises": [n1,n2],
-        }, "interpolation_percentual/result.pt")
 
 
 if __name__ == "__main__":
