@@ -51,6 +51,7 @@ def interpolate(args, generator, l1, l2, n1, n2):
         torch.save({
             "latent": input,
             "noise": n1,
+            "noises": [n1,n2],
         }, "interpolation_percentual/result.pt")
 
 
