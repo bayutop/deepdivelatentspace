@@ -17,19 +17,27 @@ def generate_truncation_strip(args, generator, latent, noise):
         images = []
         for i in range(0,6):
             image, _ = generator([slice_latent], input_is_latent=True, noise=noise, truncation=i*0.2, truncation_latent=mean_latent)
-            if not os.path.exists('sample'):
-                os.makedirs('sample')
-            images.append(image)
+            if not os.path.exists('truncation'):
+                os.makedirs('truncation')
+            utils.save_image(
+                image,
+                f'truncation/{str(i).zfill(6)}.png',
+                nrow=1,
+                normalize=True,
+                range=(-1, 1),
+            )
 
-        image_out = torch.cat(images)
-        utils.save_image(
-            image_out,
-            f'sample/truncation_strip.png',
-            nrow=8,
-            normalize=True,
-            range=(-1, 1)
-        )
+                    if not os.path.exists('interpolation_loop_w'):
+                os.makedirs('interpolation_loop_w')
 
+            utils.save_image(
+                image,
+                f'interpolation_loop_w/{str(i).zfill(6)}.png',
+                nrow=1,
+                normalize=True,
+                range=(-1, 1),
+            )
+        
 if __name__ == '__main__':
     device = 'cuda'
 
