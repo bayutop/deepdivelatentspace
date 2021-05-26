@@ -26,17 +26,6 @@ def generate_truncation_strip(args, generator, latent, noise):
                 normalize=True,
                 range=(-1, 1),
             )
-
-                    if not os.path.exists('interpolation_loop_w'):
-                os.makedirs('interpolation_loop_w')
-
-            utils.save_image(
-                image,
-                f'interpolation_loop_w/{str(i).zfill(6)}.png',
-                nrow=1,
-                normalize=True,
-                range=(-1, 1),
-            )
         
 if __name__ == '__main__':
     device = 'cuda'
