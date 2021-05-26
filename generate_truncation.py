@@ -21,7 +21,7 @@ def generate_truncation_strip(args, generator, latent, noise):
                 os.makedirs('truncation')
             utils.save_image(
                 image,
-                f'truncation/{str(i).zfill(6)}.png',
+                f'truncation/{str(i).zfill(6)}.jpg',
                 nrow=1,
                 normalize=True,
                 range=(-1, 1),
