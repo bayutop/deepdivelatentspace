@@ -15,8 +15,8 @@ def generate_truncation_strip(args, generator, latent, noise):
         slice_latent = latent[0,:].unsqueeze(0)
         
         images = []
-        for i in range(0,6):
-            image, _ = generator([slice_latent], input_is_latent=True, noise=noise, truncation=i*0.2, truncation_latent=mean_latent)
+        for i in range(0,11):
+            image, _ = generator([slice_latent], input_is_latent=True, noise=noise, truncation=i*0.1, truncation_latent=mean_latent)
             if not os.path.exists('truncation'):
                 os.makedirs('truncation')
             utils.save_image(
